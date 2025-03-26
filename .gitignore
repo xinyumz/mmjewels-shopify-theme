@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Shopify
+.env
+.shopify/
+dist/
+*.zip
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# System
+Thumbs.db
