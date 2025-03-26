@@ -1,0 +1,5 @@
+{% capture font_options_string %}F1 - Alex Brush,F2 - Autumn Chant,F3 - Magnolia Script,F4 - Halimun,F5 - Uyghur-Merdane,F6 - Scriptina,F7 - Old English Text,F8 - Cervanttis,F9 - Alison,F10 - Script MT Bold,F11 - Double Feature,F12 - Elianna,F13 - Passions ConflictROB,F14 - Counselor Script,F15 - Rosellinda Alyamore,F16 - Magneto,F17 - Amolina Boutique Script,F18 - Guttural,F19 - Amolina Boutique Script 2,F20 - HFF Fire Dancer,F21 - Freebooter Script,F22 - Soda,F23 - TheNautiGal,F24 - TheNautiGal 2,F25 - Inked Angels Personal Use,F26 - Howzat Display CapsSSi,F27 - Gallatone,F28 - Christmas,F29 - ALS Script,F30 - Italianno Rob,F31 - Beradon Script,F32 - Follow You into the World,F33 - OPTI Dianna Script BoldAgen,F34 - Sweetness Script,F35 - VfWedding24,F36 - VFFree64,F37 - Raisin des Sables,F38 - Jenna Sue,F39 - Famous Label,F40 - Raisin des Sables 2,F41 - Angie Makes Dahlia Darling,F42 - TheNautiGal 3,F43 - ALS Script 2,F44 - Brush Script MT,F45 - 34991{% endcapture %}
+{% assign font_options = font_options_string | split: ',' %}
+{% for font in font_options %}
+  <option value="{{ font | escape }}">{{ font }}</option>
+{% endfor %}

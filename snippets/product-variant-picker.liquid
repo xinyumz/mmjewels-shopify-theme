@@ -1,0 +1,167 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+{% if product.tags contains 'custom-letter' %}
+  <div id="custom-letter-product-form-container" class="custom-product-form">
+    <form id="custom-letter-product-form">
+      <div class="form-group" data-field="Color">
+        <label>Choose Color <span class="required">*</span></label>
+        <div class="radio-group">
+          <input type="radio" id="color-gold" name="properties[Color]" value="gold" required>
+          <label for="color-gold">Gold</label>
+          <input type="radio" id="color-silver" name="properties[Color]" value="silver" required>
+          <label for="color-silver">Silver</label>
+        </div>
+        <div class="form-description">*Materials: 18k Gold or White Gold Vermeil</div>
+      </div>
+
+      {% if product.tags contains 'rings' %}
+        <div class="form-group" data-field="Ring Size">
+          <label for="ring-size">Ring Size <span class="required">*</span></label>
+          <select name="properties[Ring Size]" id="ring-size" required>
+            <option value="">-- Please select --</option>
+            {% for size in (4..12) %}
+              <option value="{{ size }}">{{ size }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
+      <div class="form-group" data-field="Custom Text">
+        <label for="custom-text">Custom Text <span class="required">*</span></label>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            name="properties[Custom Text]"
+            id="custom-text"
+            required
+            maxlength="9"
+            placeholder="Enter your desired text"
+          >
+          <div id="char-count">0/9</div>
+        </div>
+        <div class="form-description">Provide your desired text (9 letters max)</div>
+      </div>
+
+      <div class="form-group" data-field="Font">
+        <label for="custom-font">Choose Font <span class="required">*</span></label>
+        <select name="properties[Font]" id="custom-font" required>
+          <option value="">-- Please select --</option>
+          {% render 'font-options' %}
+        </select>
+        <div class="form-description">
+          Please find the
+          <a
+            href="https://cdn.shopify.com/s/files/1/0680/1955/2511/files/font-menu.jpg?v=1720061165"
+            target="_blank"
+            class="font-menu-link"
+            >font menu</a
+          >
+          here
+        </div>
+      </div>
+    </form>
+  </div>
+{% endif %}
+
+{%- unless product.has_only_default_variant -%}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign swatch_count = option.values | map: 'swatch' | compact | size
+        assign picker_type = block.settings.picker_type
+
+        if swatch_count > 0 and block.settings.swatch_shape != 'none'
+          if block.settings.picker_type == 'dropdown'
+            assign picker_type = 'swatch_dropdown'
+          else
+            assign picker_type = 'swatch'
+          endif
+        endif
+      -%}
+      {%- if picker_type == 'swatch' -%}
+        <fieldset class="js product-form__input product-form__input--swatch">
+          <legend class="form__label">
+            {{ option.name }}:
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- elsif picker_type == 'button' -%}
+        <fieldset class="js product-form__input product-form__input--pill">
+          <legend class="form__label">{{ option.name }}</legend>
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %}
+        </fieldset>
+      {%- else -%}
+        <div class="product-form__input product-form__input--dropdown">
+          <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <div class="select">
+            {%- if picker_type == 'swatch_dropdown' -%}
+              <span
+                data-selected-value
+                class="dropdown-swatch"
+              >
+                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+              </span>
+            {%- endif -%}
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </select>
+            {% render 'icon-caret' %}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <script type="application/json" data-selected-variant>
+      {{ product.selected_or_first_available_variant | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}
+
+{% if product.tags contains 'custom-letter' %}
+  <script type="application/json" data-custom-product="true"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const productForm = document.querySelector('product-form');
+      if (productForm) {
+        productForm.initCustomForm();
+      }
+    });
+  </script>
+{% endif %}

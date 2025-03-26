@@ -1,0 +1,149 @@
+/* Custom Letter Product Form Styles */
+#custom-letter-product-form-container {
+  margin-bottom: 2rem;
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+}
+
+#custom-letter-product-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+#custom-letter-product-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+#custom-letter-product-form input[type="text"],
+#custom-letter-product-form select {
+  width: 90%;
+  padding: 0.9rem;
+  border: 1.5px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 10px; /* Increased border-radius for rounder corners */
+  font-size: 1.45rem;
+  color: rgba(var(--color-foreground), 0.8);
+  font-family: var(--font-body-family);
+}
+
+#custom-letter-product-form input[type="text"]:focus,
+#custom-letter-product-form select:focus {
+  border-color: rgba(var(--color-foreground), 0.5);
+  outline: none;
+  box-shadow: 0 0 3px rgba(var(--color-foreground), 0.2);
+}
+
+#custom-letter-product-form .radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+#custom-letter-product-form .radio-group label {
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  font-size: 1.4rem;
+  font-weight: normal;
+  border: 1px solid rgba(var(--color-foreground), 0.55);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#custom-letter-product-form .radio-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#custom-letter-product-form .radio-group input[type="radio"]:checked + label {
+  background-color: #742429;
+  color: #ffffff;
+  border-color: #742429;
+}
+
+#custom-letter-product-form .radio-group label:hover {
+  background-color: rgba(var(--color-foreground), 0.05);
+}
+
+.custom-product-form .required {
+  color: red;
+}
+
+.custom-product-form .error-message {
+  color: rgba(var(--color-error), 1);
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+#custom-letter-product-form .form-description {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.7);
+  margin-top: 0.25rem;
+}
+
+#custom-letter-product-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2rem;
+  background: linear-gradient(45deg, transparent 50%, rgba(var(--color-foreground), 0.7) 50%),
+              linear-gradient(135deg, rgba(var(--color-foreground), 0.7) 50%, transparent 50%);
+  background-position: calc(100% - 15px) 1em, calc(100% - 10px) 1em;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.font-menu-link {
+  color: rgba(var(--color-link), 1);
+  text-decoration-color: rgba(var(--color-link), 0.3);
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.1rem;
+  transition: text-decoration-thickness var(--duration-short) ease;
+}
+
+.font-menu-link:hover {
+  color: rgba(var(--color-link), 0.8);
+  text-decoration-thickness: 0.2rem;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#custom-text {
+  width: 100%;
+  padding: 0.5rem 60px 0.5rem 0.5rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1.5px solid rgba(var(--color-foreground), 0.2);
+}
+
+#char-count {
+  position: absolute;
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.55);
+  pointer-events: none;
+  background-color: transparent;
+  padding: 0 5px;
+  line-height: 1;
+}
+
+#custom-text:focus {
+  outline: none;
+  border-color: rgba(var(--color-foreground), 0.5);
+  box-shadow: 0 0 3px rgba(var(--color-foreground), 0.2);
+}
+
+#custom-text::placeholder {
+  color: rgba(var(--color-foreground), 0.4);
+}
+
