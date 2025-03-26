@@ -22,6 +22,7 @@ This is the custom Shopify theme for [mmjewelselection.com](https://mmjewelselec
 npm install -g @shopify/cli @shopify/theme
 shopify theme pull --store mmjewelselection.myshopify.com
 shopify theme dev
+```
 
 Note: Shopify CLI may require store owner access and proper authentication.
 
@@ -40,3 +41,4 @@ You can of course customize this with whatever’s relevant to your dev process 
 git add .gitignore README.md
 git commit -m "Add .gitignore and basic README"
 git push
+```
